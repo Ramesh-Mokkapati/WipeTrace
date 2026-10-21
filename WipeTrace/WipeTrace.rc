@@ -1,0 +1,70 @@
+#include "resource.h"
+#include "winres.h"
+
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+
+IDR_MAINFRAME           ICON                    "res\\WipeTrace.ico"
+
+IDD_WIPETRACE_DIALOG DIALOGEX 0, 0, 600, 345
+STYLE DS_SHELLFONT | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX
+EXSTYLE WS_EX_APPWINDOW | WS_EX_ACCEPTFILES
+CAPTION "WipeTrace - Secure File && Folder Deletion"
+FONT 9, "Segoe UI", 400, 0, 0x1
+BEGIN
+    LTEXT           "Drive:",IDC_STATIC_DRIVE,7,9,24,8
+    COMBOBOX        IDC_DRIVE,32,7,360,200,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Wipe &Free Space...",IDC_WIPEFREE,398,6,90,14
+
+    LTEXT           "Browse (double-click a file, or select and Add):",IDC_STATIC_BROWSE,7,28,200,8
+    LTEXT           "Items to securely delete (drag here, add, or right-click in Explorer):",IDC_STATIC_TARGETS,222,28,180,8
+    PUSHBUTTON      "Add &Files...",IDC_ADDFILES,404,25,46,14
+    PUSHBUTTON      "Add F&older...",IDC_ADDFOLDER,454,25,52,14
+    PUSHBUTTON      "&Remove",IDC_REMOVE,510,25,40,14
+    PUSHBUTTON      "C&lear",IDC_CLEAR,554,25,39,14
+
+    CONTROL         "",IDC_TREE,"SysTreeView32",TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT | TVS_SHOWSELALWAYS | TVS_INFOTIP | WS_BORDER | WS_TABSTOP,7,42,208,150
+    PUSHBUTTON      "&Add Selected  >",IDC_ADDSEL,7,196,208,14
+    CONTROL         "",IDC_TARGETS,"SysListView32",LVS_REPORT | LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,222,42,371,168
+
+    GROUPBOX        "Options",IDC_OPTIONS,7,215,586,66
+    LTEXT           "Overwrite:",IDC_STATIC_PASSES,15,230,40,8
+    COMBOBOX        IDC_PASSES,58,228,150,100,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "&Scramble file and folder names before deleting",IDC_SCRAMBLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,220,229,220,10
+    CONTROL         "Free-space wipe also &cleans the entries of deleted files (their names and small files)",IDC_CLEANMFT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,247,420,10
+    LTEXT           "Worker threads:",IDC_STATIC_THREADS,15,264,55,8
+    EDITTEXT        IDC_THREADS,72,262,30,13,ES_NUMBER
+    CONTROL         "",IDC_THREADSPIN,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | UDS_NOTHOUSANDS,102,262,10,13
+    LTEXT           "",IDC_SHELLSTATE,220,264,250,8
+    PUSHBUTTON      "",IDC_SHELL,493,261,92,14
+
+    CONTROL         "",IDC_PROGRESS,"msctls_progress32",WS_BORDER,7,287,586,10
+    LTEXT           "Deleted items cannot be recovered. On SSDs and USB flash drives, wear levelling can keep old copies that overwriting cannot reach; full-disk encryption (BitLocker) is the reliable protection there.",IDC_NOTE,7,301,586,17
+    LTEXT           "Ready.",IDC_STATUS,7,327,405,8
+    PUSHBUTTON      "S&top",IDC_STOP,420,324,50,14,WS_DISABLED
+    DEFPUSHBUTTON   "Securely &Delete...",IDC_WIPE,474,324,70,14
+    PUSHBUTTON      "Close",IDCANCEL,548,324,45,14
+END
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,0
+ PRODUCTVERSION 1,0,0,0
+ FILEFLAGSMASK 0x3fL
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "FileDescription", "WipeTrace - secure file and folder deletion"
+            VALUE "FileVersion", "1.0.0.0"
+            VALUE "InternalName", "WipeTrace.exe"
+            VALUE "OriginalFilename", "WipeTrace.exe"
+            VALUE "ProductName", "WipeTrace"
+            VALUE "ProductVersion", "1.0.0.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
